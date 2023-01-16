@@ -1,15 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './index.scss';
+import { useState } from 'react';
+import NtModal from './components/modal/NtModal';
+import { modalConfigMock } from './const/consts';
+import { NtButton } from './main';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Example of icon config
+// const iconConfig = {
+// 	iconName: 'Plus',
+// 	onlyIcon: true,
+// 	additionalClassIcon: 'nt-icon__color--primary',
+// 	mode: 'dark | light',
+// };
 
-  return (
-    <div className="App">
-      <h2>AppComponent</h2>
-    </div>
-  )
-}
+const App = () => {
+	const [isModalVisible, setModaVisible] = useState(false);
 
-export default App
+	const openModal = () => setModaVisible(true);
+	const closeModal = () => setModaVisible(false);
+
+	return (
+		<div className="App">
+			<NtButton handleClick={openModal} text="click" />
+			<NtModal
+				closeModal={closeModal}
+				handleCancel={closeModal}
+				handleConfirm={closeModal}
+				isModalVisible={isModalVisible}
+				modalConfig={modalConfigMock}
+			/>
+		</div>
+	);
+};
+
+export default App;
